@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lakshya — The AI diligence agent for cloud kitchens & restaurants</title>
+<meta name="description" content="Sell-side financial diligence built for cloud kitchens and delivery-led restaurants. Reconciles aggregator, POS, tax and bank data in 2 weeks. Not 8." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Calendly inline widget assets -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<style>
+:root {
+  --bg: #0A0E1A;
+  --bg-elev: #0F1424;
+  --bg-card: #131A2C;
+  --bg-hover: #1A2238;
+  --line: #1E2740;
+  --line-soft: #161E33;
+  --line-bright: #2A3656;
+  --ink: #FFFFFF;
+  --ink-soft: #A0AEC8;
+  --ink-mute: #5E6C87;
+  --ink-dim: #3D4860;
+  --accent: #B8FF5C;
+  --accent-2: #5CE9FF;
+  --accent-soft: rgba(184, 255, 92, 0.1);
+  --positive: #4ADE80;
+  --warn: #FBBF24;
+  --danger: #F87171;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  font-feature-settings: "ss01", "cv11";
+}
+.display { font-family: 'Inter Tight', -apple-system, sans-serif; font-feature-settings: "ss01"; }
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.tab-nums { font-variant-numeric: tabular-nums; }
+a { color: inherit; text-decoration: none; }
+
+.container { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 760px) { .container { padding: 0 20px; } }
+
+/* ================== NAV ================== */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10, 14, 26, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+  max-width: 1320px; margin: 0 auto;
+  padding: 0 32px;
+}
+@media (max-width: 760px) { .nav-inner { padding: 0 20px; height: 64px; } }
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600; font-size: 19px;
+  letter-spacing: -0.025em;
+}
+.brand-glyph {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bg);
+  font-weight: 700; font-size: 14px;
+  letter-spacing: -0.02em;
+}
+.nav-center {
+  display: flex; gap: 4px;
+  padding: 4px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+}
+.nav-center a {
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  border-radius: 100px;
+  transition: all 0.15s;
+}
+.nav-center a:hover { background: var(--bg-hover); color: var(--ink); }
+@media (max-width: 940px) { .nav-center { display: none; } }
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+}
+.btn-ghost:hover { color: var(--ink); }
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+.btn-primary:hover { background: #C8FF7A; transform: translateY(-1px); }
+.btn-primary-lg {
+  padding: 14px 20px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--ink);
+  border: 1px solid var(--line-bright);
+}
+.btn-secondary:hover { background: var(--bg-hover); border-color: var(--ink-mute); }
+.btn-secondary-lg {
+  padding: 14px 20px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+@media (max-width: 760px) { .btn-ghost { display: none; } }
+
+/* ================== HERO ================== */
+.hero {
+  position: relative;
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+@media (max-width: 760px) { .hero { padding: 56px 0 0; } }
+.hero-bg {
+  position: absolute;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  width: 1200px; height: 700px;
+  background: radial-gradient(ellipse at 50% 30%, rgba(184, 255, 92, 0.08) 0%, transparent 60%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-inner { position: relative; z-index: 2; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 14px 6px 6px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 12px; color: var(--ink-soft);
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+.hero-tag-badge {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.04em;
+}
+h1.hero-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: clamp(48px, 7.5vw, 96px);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  margin-bottom: 32px;
+  max-width: 16ch;
+}
+h1.hero-title .accent { color: var(--accent); }
+.hero-deck {
+  font-size: clamp(18px, 1.8vw, 22px);
+  color: var(--ink-soft);
+  max-width: 60ch;
+  line-height: 1.5;
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+.hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 100px; }
+@media (max-width: 760px) { .hero-cta-row { margin-bottom: 64px; } }
+
+.hero-numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  margin: 0 -32px;
+  padding: 56px 32px 80px;
+}
+@media (max-width: 880px) {
+  .hero-numbers { grid-template-columns: repeat(2, 1fr); gap: 32px 0; padding: 40px 32px 56px; }
+}
+@media (max-width: 760px) {
+  .hero-numbers { margin: 0 -20px; padding: 40px 20px 48px; }
+}
+.hero-number {
+  padding: 0 24px;
+  border-right: 1px solid var(--line-soft);
+}
+.hero-number:first-child { padding-left: 0; }
+.hero-number:last-child { border-right: none; }
+@media (max-width: 880px) {
+  .hero-number:nth-child(2) { border-right: none; }
+  .hero-number:nth-child(3) { padding-left: 0; }
+  .hero-number { padding: 0 16px; }
+}
+.hero-number-val {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(44px, 6.5vw, 80px);
+  letter-spacing: -0.045em;
+  line-height: 1;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.hero-number-val.accent { color: var(--accent); }
+.hero-number-lbl {
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  max-width: 22ch;
+}
+
+/* ================== SECTIONS ================== */
+.section { padding: 140px 0; position: relative; }
+@media (max-width: 760px) { .section { padding: 80px 0; } }
+.section-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.section-tag::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+h2.section-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  margin-bottom: 28px;
+  max-width: 22ch;
+}
+h2.section-title .accent { color: var(--accent); }
+.section-deck {
+  font-size: clamp(16px, 1.5vw, 19px);
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 60ch;
+  letter-spacing: -0.005em;
+  margin-bottom: 72px;
+}
+
+/* ================== PROBLEM (Big Number Comparison) ================== */
+.problem-section {
+  background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 50%, transparent 100%);
+  position: relative;
+}
+.compare-numbers {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 56px 0;
+  margin-bottom: 56px;
+}
+@media (max-width: 880px) {
+  .compare-numbers { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
+}
+.compare-side {
+  display: flex; flex-direction: column;
+  gap: 24px;
+}
+.compare-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(72px, 10vw, 140px);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--ink-dim);
+}
+.compare-num.win { color: var(--accent); }
+.compare-num-sub {
+  font-size: 13px;
+  color: var(--ink-mute);
+  letter-spacing: -0.01em;
+}
+.compare-num-sub strong { color: var(--ink-soft); font-weight: 500; }
+.compare-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.compare-arrow {
+  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px;
+  border: 1px solid var(--line-bright);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 24px;
+}
+@media (max-width: 880px) {
+  .compare-arrow { transform: rotate(90deg); margin: 0 auto; }
+}
+
+.problem-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 760px) { .problem-list { grid-template-columns: 1fr; } }
+.problem-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.2s ease;
+}
+.problem-card:hover { border-color: var(--line-bright); transform: translateY(-2px); }
+.problem-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.problem-card-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.problem-card-body {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* ================== PIPELINE ================== */
+.pipeline-block {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.pipeline-header {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--bg-card);
+}
+.pipeline-header-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.pipeline-header-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.status-dot {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+  box-shadow: 0 0 8px var(--accent);
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.pipeline-rows { padding: 8px; }
+.pipeline-row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto 100px;
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+@media (max-width: 760px) {
+  .pipeline-row { grid-template-columns: 50px 1fr; gap: 16px; padding: 20px 16px; }
+  .pipeline-row-meta, .pipeline-row-status { grid-column: 2; }
+}
+.pipeline-row:hover { background: var(--bg-hover); }
+.pipeline-row-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 36px;
+  letter-spacing: -0.04em;
+  color: var(--ink-dim);
+  line-height: 1;
+}
+.pipeline-row:hover .pipeline-row-num { color: var(--accent); }
+.pipeline-row-body { min-width: 0; }
+.pipeline-row-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.015em;
+  margin-bottom: 6px;
+}
+.pipeline-row-desc {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.pipeline-row-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  max-width: 200px;
+  text-align: right;
+}
+@media (max-width: 760px) { .pipeline-row-meta { text-align: left; } }
+.pipeline-row-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  background: var(--accent-soft);
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid rgba(184, 255, 92, 0.2);
+}
+
+/* ================== DELIVERABLE ================== */
+.qoe-frame {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.qoe-frame-header {
+  background: var(--bg-card);
+  padding: 16px 24px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.qoe-window-dots { display: flex; gap: 6px; }
+.qoe-window-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line-bright); }
+.qoe-window-title {
+  flex: 1; text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+.qoe-body { padding: 40px; }
+@media (max-width: 760px) { .qoe-body { padding: 24px; } }
+.qoe-doc-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+  flex-wrap: wrap; gap: 16px;
+}
+.qoe-doc-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.qoe-doc-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+.qoe-stamp {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  padding: 6px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.qoe-big-number {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 36px;
+}
+@media (max-width: 760px) { .qoe-big-number { grid-template-columns: 1fr 1fr; } }
+.qoe-bn-cell {
+  padding: 28px 24px;
+  border-right: 1px solid var(--line);
+}
+.qoe-bn-cell:last-child { border-right: none; }
+@media (max-width: 760px) {
+  .qoe-bn-cell:nth-child(2) { border-right: none; }
+  .qoe-bn-cell:nth-child(3) { border-top: 1px solid var(--line); }
+  .qoe-bn-cell:nth-child(4) { border-top: 1px solid var(--line); }
+}
+.qoe-bn-cell:first-child { padding-left: 0; }
+.qoe-bn-cell:last-child { padding-right: 0; }
+@media (max-width: 760px) { .qoe-bn-cell:first-child, .qoe-bn-cell:last-child { padding-left: 24px; padding-right: 24px; } }
+.qoe-bn-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.qoe-bn-val {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 44px);
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.qoe-bn-val.flag { color: var(--danger); }
+.qoe-bn-val.accent { color: var(--accent); }
+
+.qoe-findings-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.finding-line {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.finding-line:last-child { border-bottom: none; }
+@media (max-width: 760px) {
+  .finding-line { grid-template-columns: 80px 1fr; }
+  .finding-amount { grid-column: 2; padding-top: 6px; }
+}
+.finding-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 5px 8px;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 500;
+  height: fit-content;
+}
+.finding-tag.warn { background: rgba(251, 191, 36, 0.12); color: var(--warn); border: 1px solid rgba(251, 191, 36, 0.2); }
+.finding-tag.flag { background: rgba(248, 113, 113, 0.12); color: var(--danger); border: 1px solid rgba(248, 113, 113, 0.2); }
+.finding-tag.note { background: var(--bg-hover); color: var(--ink-soft); border: 1px solid var(--line-bright); }
+.finding-body { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; padding-top: 1px; }
+.finding-body strong { color: var(--ink); font-weight: 500; }
+.finding-amount {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--danger);
+  text-align: right;
+}
+
+/* ================== SERVICE TIERS (Two ways to work) ================== */
+.tiers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 980px) { .tiers { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .tier { padding: 28px 22px; }
+  .tier-badge { left: 22px; }
+  .tier-desc { min-height: 0; margin-bottom: 22px; }
+  .tier-name { font-size: 23px; }
+}
+.tier {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 36px;
+  position: relative;
+  display: flex; flex-direction: column;
+  transition: all 0.2s ease;
+}
+.tier:hover { border-color: var(--line-bright); transform: translateY(-2px); }
+.tier.featured {
+  background: var(--bg-card);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 16px 48px rgba(184, 255, 92, 0.06);
+}
+.tier.upcoming {
+  background: transparent;
+  border: 1px dashed var(--line-bright);
+  opacity: 0.85;
+}
+.tier-badge {
+  position: absolute;
+  top: -12px; left: 32px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+.tier-badge.muted {
+  background: var(--bg-hover);
+  color: var(--ink-mute);
+  border: 1px solid var(--line-bright);
+}
+.tier-cycle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-mute);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.tier-cycle.accent { color: var(--accent); }
+.tier-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.tier-desc {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-bottom: 28px;
+  min-height: 65px;
+}
+.tier-price-block {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.tier-price-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(34px, 6vw, 48px);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 8px;
+  word-break: keep-all;
+}
+.tier-price-num.featured { color: var(--accent); }
+.tier-price-num.muted { color: var(--ink-mute); }
+.tier-price-unit {
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+.tier-includes-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.tier-features { list-style: none; flex: 1; }
+.tier-features li {
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.tier-features li::before {
+  content: "✓";
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  flex: 0 0 auto;
+  line-height: 1.5;
+}
+.tier.upcoming .tier-features li::before {
+  content: "·";
+  color: var(--ink-mute);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.tier-features strong { color: var(--ink); font-weight: 500; }
+.tier-cta {
+  margin-top: 28px;
+  width: 100%;
+  padding: 13px 18px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.tier-cta:hover { background: #C8FF7A; transform: translateY(-1px); }
+.tier-cta.secondary {
+  background: var(--bg-hover);
+  color: var(--ink);
+  border: 1px solid var(--line-bright);
+}
+.tier-cta.secondary:hover { background: var(--bg-card); border-color: var(--ink-mute); }
+.tier-cta.muted {
+  background: transparent;
+  color: var(--ink-mute);
+  border: 1px solid var(--line-bright);
+  cursor: not-allowed;
+}
+
+/* ================== COMPARISON TABLE ================== */
+.compare-table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 880px) { .compare-table { grid-template-columns: 1fr; } }
+.plan {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 36px 32px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.plan.featured {
+  background: var(--bg-card);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 12px 40px rgba(184, 255, 92, 0.08);
+}
+.plan-badge {
+  position: absolute;
+  top: -12px; left: 32px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+.plan-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.plan-tag {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+.plan-price {
+  display: flex; align-items: baseline; gap: 6px;
+  margin-bottom: 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.plan-price-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.plan-price-num.featured { color: var(--accent); }
+.plan-price-unit {
+  font-size: 14px;
+  color: var(--ink-mute);
+}
+.plan-features { list-style: none; }
+.plan-features li {
+  padding: 12px 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.plan-features li::before {
+  flex: 0 0 auto;
+  line-height: 1.5;
+}
+.plan-features li.yes::before {
+  content: "✓";
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+}
+.plan-features li.no::before {
+  content: "—";
+  color: var(--ink-dim);
+  font-weight: 600;
+  font-size: 13px;
+}
+.plan-features li.partial::before {
+  content: "~";
+  color: var(--warn);
+  font-weight: 600;
+  font-size: 13px;
+}
+.plan-features strong { color: var(--ink); font-weight: 500; }
+
+/* ================== PROCESS ================== */
+.process-wrap {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 80px;
+}
+@media (max-width: 900px) {
+  .process-wrap { grid-template-columns: 1fr; gap: 32px; }
+  .process-aside { position: static; top: auto; }
+  .process-aside-num { font-size: clamp(72px, 18vw, 110px); }
+}
+.process-aside {
+  position: sticky; top: 100px;
+}
+.process-aside-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(96px, 12vw, 144px);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.process-aside-lbl {
+  font-size: 15px;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+  max-width: 24ch;
+  line-height: 1.45;
+}
+.process-steps {
+  position: relative;
+  padding-left: 40px;
+  border-left: 1px solid var(--line);
+}
+.process-step {
+  position: relative;
+  padding-bottom: 48px;
+}
+.process-step:last-child { padding-bottom: 0; }
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: -46px; top: 8px;
+  width: 12px; height: 12px;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+}
+.process-step-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.process-step-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.process-step-body {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 60ch;
+}
+@media (max-width: 480px) {
+  .process-steps { padding-left: 28px; }
+  .process-step::before { left: -34px; }
+  .process-step-title { font-size: 20px; }
+}
+
+/* ================== WHO IT'S FOR (Archetypes) ================== */
+.archetypes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 880px) { .archetypes { grid-template-columns: 1fr; } }
+.archetype {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.2s ease;
+}
+.archetype:hover {
+  border-color: var(--line-bright);
+  background: var(--bg-card);
+  transform: translateY(-2px);
+}
+.archetype-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 500;
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(184, 255, 92, 0.2);
+  border-radius: 100px;
+}
+.archetype-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.archetype-desc {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+.archetype-stats {
+  display: flex;
+  gap: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.archetype-stat-val {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.archetype-stat-lbl {
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+
+/* ================== TESTIMONIALS ================== */
+.testimonials {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 880px) { .testimonials { grid-template-columns: 1fr; } }
+.testimonial {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 40px;
+  display: flex; flex-direction: column;
+}
+.testimonial-lg { padding: 56px 48px; }
+@media (max-width: 760px) {
+  .testimonial { padding: 28px; }
+  .testimonial-lg { padding: 32px 28px; }
+}
+.testimonial-quote {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 28px);
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  margin-bottom: 28px;
+  flex: 1;
+}
+.testimonial-quote::before {
+  content: """;
+  display: block;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 80px;
+  color: var(--accent);
+  line-height: 0.6;
+  height: 32px;
+  margin-bottom: 8px;
+}
+.testimonial-quote .accent { color: var(--accent); }
+.testimonial-author {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  background: var(--bg-hover);
+  border: 1px solid var(--line-bright);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+}
+.testimonial-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.testimonial-role {
+  font-size: 12px;
+  color: var(--ink-mute);
+}
+.testimonial-pending {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--warn);
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+/* ================== ABOUT FOUNDER ================== */
+.about-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 900px) { .about-wrap { grid-template-columns: 1fr; gap: 40px; } }
+.about-side {
+  position: sticky; top: 100px;
+}
+.about-name-block {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+}
+.about-avatar {
+  width: 64px; height: 64px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bg);
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.about-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.about-role {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+.about-links {
+  display: flex; flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.about-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.about-link:hover { color: var(--accent); }
+.about-link::before {
+  content: "→ ";
+  color: var(--ink-mute);
+}
+.about-body p {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  letter-spacing: -0.005em;
+}
+.about-body p strong { color: var(--ink); font-weight: 500; }
+.about-body p:first-of-type {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.about-credentials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 640px) { .about-credentials { grid-template-columns: 1fr; gap: 24px; } }
+.cred {
+  padding: 0 24px;
+  border-right: 1px solid var(--line-soft);
+}
+.cred:first-child { padding-left: 0; }
+.cred:last-child { border-right: none; }
+@media (max-width: 640px) { .cred { border-right: none; padding: 0; } }
+.cred-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 36px;
+  letter-spacing: -0.035em;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.cred-lbl {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  max-width: 22ch;
+}
+
+/* ================== FAQ ================== */
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 64px;
+}
+@media (max-width: 880px) { .faq-list { grid-template-columns: 1fr; gap: 0; } }
+.faq-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.faq-q {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.faq-a {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.faq-a strong { color: var(--ink); font-weight: 500; }
+
+/* ================== CTA SECTION ================== */
+.cta-section {
+  position: relative;
+  padding: 140px 32px;
+  margin: 80px 32px;
+  background: var(--bg-elev);
+  border-radius: 32px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  text-align: center;
+}
+@media (max-width: 760px) { .cta-section { padding: 80px 24px; margin: 56px 20px; border-radius: 24px; } }
+.cta-section::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%; height: 60%;
+  background: radial-gradient(ellipse, rgba(184, 255, 92, 0.08) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+.cta-section-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+.cta-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 64px);
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  margin-bottom: 20px;
+}
+.cta-title .accent { color: var(--accent); }
+.cta-deck {
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+
+/* ================== FOOTER ================== */
+.footer {
+  padding: 100px 0 32px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 56px;
+  margin-bottom: 72px;
+}
+@media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-brand-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600; font-size: 19px;
+  letter-spacing: -0.025em;
+}
+.footer-tagline {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 32ch;
+  margin-bottom: 28px;
+  letter-spacing: -0.005em;
+}
+.footer-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(184, 255, 92, 0.2);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+.footer-col-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.footer-list { list-style: none; }
+.footer-list li {
+  font-size: 14px;
+  padding: 7px 0;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.15s;
+  letter-spacing: -0.005em;
+}
+.footer-list li:hover { color: var(--ink); }
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-dim);
+  letter-spacing: 0.04em;
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ================== CALENDLY OVERRIDES ================== */
+.calendly-overlay { background: rgba(10, 14, 26, 0.85) !important; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.calendly-popup { background: var(--bg-elev) !important; border-radius: 16px !important; overflow: hidden; box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--line) !important; }
+.calendly-popup-close { background: var(--bg-card) !important; border: 1px solid var(--line-bright) !important; border-radius: 8px !important; }
+
+/* Big mark for footer */
+.footer-mark {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(80px, 14vw, 200px);
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  color: var(--bg-elev);
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  user-select: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">
+      <div class="brand-glyph">l</div>
+      <span>lakshya</span>
+    </a>
+    <div class="nav-center">
+      <a href="#who">Who it's for</a>
+      <a href="#pipeline">Product</a>
+      <a href="#deliverable">Deliverable</a>
+      <a href="#ways">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-primary" onclick="openContact()">Book a call</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+
+    <div class="hero-tag">
+      <span class="hero-tag-badge">NEW</span>
+      <span>For cloud kitchen &amp; restaurant operators · ₹2—500 Cr revenue</span>
+    </div>
+
+    <h1 class="hero-title display">Know what your cloud kitchen or restaurant is <span class="accent">actually worth</span> — before the sale, not after.</h1>
+    <p class="hero-deck">lakshya runs the financial audit a sophisticated buyer would run anyway — commission leakage, brand-level unit economics, cohort behaviour — and hands you the findings first. So you walk into the sale with leverage, not surprises.</p>
+
+    <div class="hero-cta-row">
+      <button class="btn btn-primary btn-primary-lg" onclick="openContact()">Book a 30-min walkthrough →</button>
+      <button class="btn btn-secondary btn-secondary-lg" onclick="document.getElementById('pipeline').scrollIntoView()">See how it works</button>
+    </div>
+
+    <div class="hero-numbers">
+      <div class="hero-number">
+        <div class="hero-number-val display tab-nums accent">14</div>
+        <div class="hero-number-lbl">Days end-to-end vs. 56 day industry standard</div>
+      </div>
+      <div class="hero-number">
+        <div class="hero-number-val display tab-nums">7</div>
+        <div class="hero-number-lbl">Stages of structured diligence pipeline</div>
+      </div>
+      <div class="hero-number">
+        <div class="hero-number-val display tab-nums">40<span style="font-size: 0.6em;">%</span></div>
+        <div class="hero-number-lbl">Of the cost of a Big 4 quote</div>
+      </div>
+      <div class="hero-number">
+        <div class="hero-number-val display tab-nums">100<span style="font-size: 0.6em;">%</span></div>
+        <div class="hero-number-lbl">Delivery-led food sector specific</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== WHO IT'S FOR ===================== -->
+<section class="section" id="who" style="padding-top: 100px; padding-bottom: 100px;">
+  <div class="container">
+    <div class="section-tag">Who this is for</div>
+    <h2 class="section-title display">Three kinds of founders. <span class="accent">One kind of clarity.</span></h2>
+    <p class="section-deck">We work with cloud kitchen and delivery-led restaurant operators at three distinct moments. If one of these is you, we should talk.</p>
+
+    <div class="archetypes">
+
+      <div class="archetype">
+        <div class="archetype-tag">EXPLORING</div>
+        <div class="archetype-title">You're 12—18 months from a process.</div>
+        <div class="archetype-desc">Profitable, growing, and starting to think about exit or strategic capital. You want to know what your business is actually worth — and what to clean up before anyone else looks. Pre-transaction diligence pays itself back 20× in valuation uplift.</div>
+        <div class="archetype-stats">
+          <div>
+            <div class="archetype-stat-val">₹8—60Cr</div>
+            <div class="archetype-stat-lbl">Typical revenue</div>
+          </div>
+          <div>
+            <div class="archetype-stat-val">3—12</div>
+            <div class="archetype-stat-lbl">Kitchens operating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="archetype">
+        <div class="archetype-tag">PROCESS-READY</div>
+        <div class="archetype-title">You're 1—3 months from going to market.</div>
+        <div class="archetype-desc">Banker hired or about to be, materials being prepped, conversations starting with strategics and PE. You need a buyer-grade quality of earnings memo in hand before the first data room goes live. We turn this around in two weeks.</div>
+        <div class="archetype-stats">
+          <div>
+            <div class="archetype-stat-val">₹25—250Cr</div>
+            <div class="archetype-stat-lbl">Typical revenue</div>
+          </div>
+          <div>
+            <div class="archetype-stat-val">8—40</div>
+            <div class="archetype-stat-lbl">Kitchens operating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="archetype">
+        <div class="archetype-tag">IN PROCESS</div>
+        <div class="archetype-title">You're mid-diligence and something's off.</div>
+        <div class="archetype-desc">Buyer's team has surfaced a finding that's pulling your valuation down, or you're getting hit with data requests faster than you can respond. We come in as a second opinion, pressure-test the buyer's adjustments, and defend the number with reconciled data.</div>
+        <div class="archetype-stats">
+          <div>
+            <div class="archetype-stat-val">Any</div>
+            <div class="archetype-stat-lbl">Revenue range</div>
+          </div>
+          <div>
+            <div class="archetype-stat-val">5—7 days</div>
+            <div class="archetype-stat-lbl">Rapid response</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px 24px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 12px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;">Also a fit</span>
+      <span style="font-size: 14px; color: var(--ink-soft); line-height: 1.5; flex: 1; min-width: 280px;">
+        <strong style="color: var(--ink); font-weight: 500;">QSR chains, multi-brand operators &amp; delivery-led restaurants</strong> — anyone whose revenue runs primarily through delivery aggregators and shares the same unit-economics shape. Heavily dine-in? We'll tell you honestly on the call whether we're the right fit.
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROBLEM ===================== -->
+<section class="section problem-section" id="problem">
+  <div class="container">
+    <div class="section-tag">The problem</div>
+    <h2 class="section-title display">Diligence today is <span class="accent">built for someone else's business.</span></h2>
+    <p class="section-deck">Most accounting firms and Big 4 teams haven't spent a day inside a DoorDash or Deliveroo dashboard. They reconcile P&Ls in Excel for six weeks, miss the things specific to your business, and hand you a deck the buyer will spend two days pulling apart.</p>
+
+    <div class="compare-numbers">
+      <div class="compare-side">
+        <div class="compare-label">// Industry standard</div>
+        <div class="compare-num display tab-nums">8<span style="font-size: 0.4em; font-weight: 400; margin-left: 4px; color: var(--ink-mute);">wks</span></div>
+        <div class="compare-num-sub"><strong>₹25—45 LAKH</strong> in fees · generic sector expertise · 6+ rounds of follow-up data requests</div>
+      </div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-side">
+        <div class="compare-label">// With lakshya</div>
+        <div class="compare-num win display tab-nums">2<span style="font-size: 0.4em; font-weight: 400; margin-left: 4px; opacity: 0.7;">wks</span></div>
+        <div class="compare-num-sub"><strong style="color: var(--accent);">₹6—12 LAKH</strong> in fees · delivery-led food specialist · 1 structured data request, AI does reconciliation</div>
+      </div>
+    </div>
+
+    <div class="problem-list">
+      <div class="problem-card">
+        <div class="problem-num display">01</div>
+        <div class="problem-card-title">Aggregator data is the business.</div>
+        <div class="problem-card-body">Revenue, AOV, repeat rate, commissions, ad spend — all live inside DoorDash, UberEats, Deliveroo, Swiggy, Talabat. Most diligence treats it as a footnote, not the main event.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num display">02</div>
+        <div class="problem-card-title">Unit economics get missed.</div>
+        <div class="problem-card-body">A multi-brand operator's real story lives in CM per brand × per kitchen × per channel. Roll-up P&Ls hide everything that matters.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num display">03</div>
+        <div class="problem-card-title">Revenue is consistently overstated.</div>
+        <div class="problem-card-body">Gross order value gets booked before aggregator commissions (15—35% globally) are netted. The single most common adjustment in this sector.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num display">04</div>
+        <div class="problem-card-title">Founders find out from the buyer.</div>
+        <div class="problem-card-body">By the time the acquirer's diligence team flags an issue, the price is anchored downward and the negotiating leverage is gone.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PIPELINE ===================== -->
+<section class="section" id="pipeline">
+  <div class="container">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title display">A 7-stage pipeline. <span class="accent">Built for delivery-led food businesses.</span></h2>
+    <p class="section-deck">Each stage ingests one input type and produces validated, schema-checked output. The whole pipeline runs in days, not weeks — because the AI does the reconciliation work, and we do the judgment work.</p>
+
+    <div class="pipeline-block">
+      <div class="pipeline-header">
+        <span class="pipeline-header-label">// DILIGENCE PIPELINE v2.4</span>
+        <span class="pipeline-header-status"><span class="status-dot"></span>LIVE · IN PRODUCTION</span>
+      </div>
+
+      <div class="pipeline-rows">
+        <div class="pipeline-row">
+          <div class="pipeline-row-num display">01</div>
+          <div class="pipeline-row-body">
+            <div class="pipeline-row-title">Document classification</div>
+            <div class="pipeline-row-desc">Auto-classifies every file — tax filings, bank statements, aggregator exports, POS dumps, invoices.</div>
+          </div>
+          <div class="pipeline-row-meta">Claude Haiku<br>99% accuracy</div>
+          <div class="pipeline-row-status">ACTIVE</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-row-num display">02</div>
+          <div class="pipeline-row-body">
+            <div class="pipeline-row-title">Structured financial extraction</div>
+            <div class="pipeline-row-desc">Pulls line items into typed schemas with Decimal precision. Flags low-confidence rows for human review.</div>
+          </div>
+          <div class="pipeline-row-meta">Pydantic schemas<br>SHA-256 caching</div>
+          <div class="pipeline-row-status">ACTIVE</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-row-num display">03</div>
+          <div class="pipeline-row-body">
+            <div class="pipeline-row-title">Aggregator reconciliation</div>
+            <div class="pipeline-row-desc">DoorDash, UberEats, Swiggy, Deliveroo gross orders vs. bank credits — net of commissions, refunds, cancellations.</div>
+          </div>
+          <div class="pipeline-row-meta">Commission validation<br>Variance reports</div>
+          <div class="pipeline-row-status">ACTIVE</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-row-num display">04</div>
+          <div class="pipeline-row-body">
+            <div class="pipeline-row-title">Unit economics, brand × kitchen</div>
+            <div class="pipeline-row-desc">Contribution margin per brand, per kitchen, per channel, per daypart. The view buyers actually want.</div>
+          </div>
+          <div class="pipeline-row-meta">Multi-dim pivot<br>Cohort isolation</div>
+          <div class="pipeline-row-status">ACTIVE</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-row-num display">05</div>
+          <div class="pipeline-row-body">
+            <div class="pipeline-row-title">Anomaly &amp; related-party scan</div>
+            <div class="pipeline-row-desc">Round-tripping, ghost orders, marketing cohorts, related-party fees — the things buyers catch anyway.</div>
+          </div>
+          <div class="pipeline-row-meta">Statistical outliers<br>Vendor concentration</div>
+          <div class="pipeline-row-status">ACTIVE</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-row-num display">06</div>
+          <div class="pipeline-row-body">
+            <div class="pipeline-row-title">Cohort &amp; repeat analysis</div>
+            <div class="pipeline-row-desc">M1—M12 retention per brand, AOV trend, organic vs. paid mix. The brand-equity signal.</div>
+          </div>
+          <div class="pipeline-row-meta">Per-brand cohorts<br>Paid CAC normalisation</div>
+          <div class="pipeline-row-status">ACTIVE</div>
+        </div>
+        <div class="pipeline-row">
+          <div class="pipeline-row-num display">07</div>
+          <div class="pipeline-row-body">
+            <div class="pipeline-row-title">Quality of earnings synthesis</div>
+            <div class="pipeline-row-desc">Adjusted revenue, adjusted EBITDA, defensible valuation band. The deliverable your acquirer needs.</div>
+          </div>
+          <div class="pipeline-row-meta">QoE memo<br>Adjustment schedule</div>
+          <div class="pipeline-row-status">ACTIVE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DELIVERABLE ===================== -->
+<section class="section" id="deliverable">
+  <div class="container">
+    <div class="section-tag">The deliverable</div>
+    <h2 class="section-title display">A buyer-grade QoE memo. <span class="accent">Not another generic deck.</span></h2>
+    <p class="section-deck">After two weeks, you have a structured report you can hand directly to a strategic acquirer or PE deal team. Below — a redacted excerpt from a recent engagement.</p>
+
+    <div class="qoe-frame">
+      <div class="qoe-frame-header">
+        <div class="qoe-window-dots">
+          <div class="qoe-window-dot"></div>
+          <div class="qoe-window-dot"></div>
+          <div class="qoe-window-dot"></div>
+        </div>
+        <div class="qoe-window-title">qoe-memo-fy24.pdf · lakshya.in/deliverables</div>
+      </div>
+
+      <div class="qoe-body">
+        <div class="qoe-doc-head">
+          <div>
+            <div class="qoe-doc-title display">Quality of earnings — preliminary</div>
+            <div class="qoe-doc-meta">SAMPLE · Spice Route Foods Pvt Ltd · FY24</div>
+          </div>
+          <div class="qoe-stamp">Confidential</div>
+        </div>
+
+        <div class="qoe-big-number">
+          <div class="qoe-bn-cell">
+            <div class="qoe-bn-lbl">Reported revenue</div>
+            <div class="qoe-bn-val display tab-nums">₹18.4<span style="font-size: 0.5em; color: var(--ink-mute); margin-left: 2px;">Cr</span></div>
+          </div>
+          <div class="qoe-bn-cell">
+            <div class="qoe-bn-lbl">Adjusted revenue</div>
+            <div class="qoe-bn-val flag display tab-nums">₹16.1<span style="font-size: 0.5em; opacity: 0.7; margin-left: 2px;">Cr</span></div>
+          </div>
+          <div class="qoe-bn-cell">
+            <div class="qoe-bn-lbl">Adjusted EBITDA</div>
+            <div class="qoe-bn-val display tab-nums">₹1.42<span style="font-size: 0.5em; color: var(--ink-mute); margin-left: 2px;">Cr</span></div>
+          </div>
+          <div class="qoe-bn-cell">
+            <div class="qoe-bn-lbl">Review flags</div>
+            <div class="qoe-bn-val accent display tab-nums">7</div>
+          </div>
+        </div>
+
+        <div class="qoe-findings-head">// Key findings</div>
+
+        <div class="finding-line">
+          <div class="finding-tag flag">FLAG</div>
+          <div class="finding-body"><strong>Revenue overstated.</strong> Gross order value booked but DoorDash/UberEats commissions not netted on 31% of months reviewed.</div>
+          <div class="finding-amount display tab-nums">−₹2.3 Cr</div>
+        </div>
+
+        <div class="finding-line">
+          <div class="finding-tag warn">WARN</div>
+          <div class="finding-body"><strong>Brand concentration risk.</strong> Hero brand contributes 67% of revenue but only 41% of contribution margin.</div>
+          <div class="finding-amount" style="color: var(--ink-mute); font-size: 13px; font-family: 'JetBrains Mono', monospace;">REVIEW</div>
+        </div>
+
+        <div class="finding-line">
+          <div class="finding-tag flag">FLAG</div>
+          <div class="finding-body"><strong>Three kitchens EBITDA-negative.</strong> Units 02, 07, 11 losing money at the unit level. Losses rolled into HQ allocation, hiding the issue.</div>
+          <div class="finding-amount display tab-nums">−₹78 L</div>
+        </div>
+
+        <div class="finding-line">
+          <div class="finding-tag warn">WARN</div>
+          <div class="finding-body"><strong>CAC inflation.</strong> Marketing spend grew 4.2× YoY while orders grew 1.8×. Repeat rate dropped from 41% to 28%. Growth increasingly paid, not organic.</div>
+          <div class="finding-amount" style="color: var(--ink-mute); font-size: 13px; font-family: 'JetBrains Mono', monospace;">REVIEW</div>
+        </div>
+
+        <div class="finding-line">
+          <div class="finding-tag flag">FLAG</div>
+          <div class="finding-body"><strong>Related-party transaction.</strong> ₹38L "consulting fees" routed to a related party in Q3 without business justification documented.</div>
+          <div class="finding-amount display tab-nums">−₹38 L</div>
+        </div>
+
+        <div class="finding-line">
+          <div class="finding-tag note">NOTE</div>
+          <div class="finding-body"><strong>Suggested valuation band.</strong> ₹14—22 Cr on adjusted revenue × 0.9—1.4× blended with adjusted EBITDA × 10—15×.</div>
+          <div class="finding-amount" style="color: var(--accent);">₹14—22 Cr</div>
+        </div>
+
+        <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-mute); letter-spacing: 0.04em;">// Composite sample for illustration. All real engagements are confidential.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE TIERS (Two ways to work) ===================== -->
+<section class="section" id="ways" style="background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 50%, transparent 100%);">
+  <div class="container">
+    <div class="section-tag">Two ways to work with us</div>
+    <h2 class="section-title display">Get a snapshot. <span class="accent">Or get the signal continuously.</span></h2>
+    <p class="section-deck">Most founders start with Diligence — a one-time, defensible read on their business before they go to market. The smarter ones then stay on Continuity, so the read stays fresh as the business changes.</p>
+
+    <div class="tiers">
+
+      <!-- Tier 1: Diligence (one-time) -->
+      <div class="tier">
+        <div class="tier-cycle">// ONE-TIME ENGAGEMENT</div>
+        <div class="tier-name">Diligence</div>
+        <div class="tier-desc">The full 7-stage pipeline, run once, end-to-end. You walk out with a buyer-grade quality of earnings memo and a defensible valuation band — in 2 weeks.</div>
+
+        <div class="tier-price-block">
+          <div class="tier-price-num display tab-nums">₹6—12<span style="font-size: 0.5em; color: var(--ink-soft); margin-left: 4px;">L</span></div>
+          <div class="tier-price-unit">flat fee · 14 days · scoped to your revenue band</div>
+        </div>
+
+        <div class="tier-includes-label">Includes</div>
+        <ul class="tier-features">
+          <li>Full <strong>QoE memo</strong> with adjustment schedule</li>
+          <li>Defensible valuation band against recent comps</li>
+          <li>2-hour walkthrough with you &amp; your CFO/CA</li>
+          <li>Buyer-ready redacted version on request</li>
+          <li>30 days of post-delivery support</li>
+        </ul>
+
+        <button class="tier-cta secondary" onclick="openContact()">Book a walkthrough →</button>
+      </div>
+
+      <!-- Tier 2: Continuity (monthly retainer) - FEATURED -->
+      <div class="tier featured">
+        <div class="tier-badge">RECURRING</div>
+        <div class="tier-cycle accent">// MONTHLY RETAINER</div>
+        <div class="tier-name">Continuity</div>
+        <div class="tier-desc">Keep the pipeline running between transactions. Every month, you get a 4-page operator memo on what's changed — and what would now flag in a buyer-side diligence.</div>
+
+        <div class="tier-price-block">
+          <div class="tier-price-num featured display tab-nums">₹75K—1.5L<span style="font-size: 0.45em; color: var(--ink-soft); margin-left: 4px;">/mo</span></div>
+          <div class="tier-price-unit">tiered to revenue band · 6-month minimum · cancel anytime after</div>
+        </div>
+
+        <div class="tier-includes-label">Includes</div>
+        <ul class="tier-features">
+          <li>Monthly <strong>operator memo</strong> (4 pages, every 30 days)</li>
+          <li>Aggregator <strong>commission leakage</strong> tracking</li>
+          <li>Brand × kitchen <strong>unit economics drift</strong></li>
+          <li>CAC trajectory &amp; repeat-rate cohort updates</li>
+          <li>Live diligence-readiness score</li>
+          <li>Quarterly review call (60 min)</li>
+        </ul>
+
+        <button class="tier-cta" onclick="openContact()">Talk to us about Continuity →</button>
+      </div>
+
+      <!-- Tier 3: Platform (coming soon) -->
+      <div class="tier upcoming">
+        <div class="tier-badge muted">COMING 2027</div>
+        <div class="tier-cycle">// SELF-SERVE PLATFORM</div>
+        <div class="tier-name">Platform</div>
+        <div class="tier-desc">The same pipeline, surfaced as a daily dashboard. Real-time commission leak alerts, CM per kitchen, brand-level retention curves — without the human in the loop.</div>
+
+        <div class="tier-price-block">
+          <div class="tier-price-num muted display tab-nums">TBD</div>
+          <div class="tier-price-unit">in development · join the waitlist below</div>
+        </div>
+
+        <div class="tier-includes-label">Will include</div>
+        <ul class="tier-features">
+          <li>Daily aggregator reconciliation &amp; alerts</li>
+          <li>Real-time CM dashboard, kitchen × brand</li>
+          <li>Anomaly detection on revenue &amp; cohort metrics</li>
+          <li>Diligence-readiness score, live</li>
+          <li>API access for your CFO/finance stack</li>
+        </ul>
+
+        <button class="tier-cta muted" disabled>Join waitlist</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMPARISON ===================== -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-tag">How we compare</div>
+    <h2 class="section-title display">Three options. <span class="accent">One that's built for you.</span></h2>
+    <p class="section-deck">For one-shot diligence, three kinds of providers exist in the market today. Two of them aren't built for delivery-led food businesses.</p>
+
+    <div class="compare-table">
+      <div class="plan">
+        <div class="plan-name">Boutique accounting firm</div>
+        <div class="plan-tag">Sector-generic, manual</div>
+        <div class="plan-price">
+          <div class="plan-price-num display tab-nums">₹8—15L</div>
+          <div class="plan-price-unit">/ 6—8 weeks</div>
+        </div>
+        <ul class="plan-features">
+          <li class="yes">Tax compliance expertise</li>
+          <li class="no">Aggregator data fluency</li>
+          <li class="no">Brand-level unit economics</li>
+          <li class="no">Cohort &amp; repeat analysis</li>
+          <li class="partial">Buyer-grade defensibility</li>
+        </ul>
+      </div>
+
+      <div class="plan featured">
+        <div class="plan-badge">lakshya</div>
+        <div class="plan-name">AI-native, sector-specific</div>
+        <div class="plan-tag">Cloud kitchens only</div>
+        <div class="plan-price">
+          <div class="plan-price-num featured display tab-nums">₹6—12L</div>
+          <div class="plan-price-unit">/ 2 weeks</div>
+        </div>
+        <ul class="plan-features">
+          <li class="yes">Built for <strong>aggregator-driven businesses</strong></li>
+          <li class="yes">Brand × kitchen × channel economics</li>
+          <li class="yes">Reconciles aggregator data to tax &amp; bank</li>
+          <li class="yes">M1—M12 cohort analysis automated</li>
+          <li class="yes">Buyer-grade QoE deliverable</li>
+        </ul>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">Big 4 / boutique M&amp;A</div>
+        <div class="plan-tag">Premium, generalist</div>
+        <div class="plan-price">
+          <div class="plan-price-num display tab-nums">₹25—45L</div>
+          <div class="plan-price-unit">/ 6—10 weeks</div>
+        </div>
+        <ul class="plan-features">
+          <li class="yes">Brand prestige with buyers</li>
+          <li class="partial">Sector-specific judgment (rare)</li>
+          <li class="no">Affordable for ₹10—40 Cr businesses</li>
+          <li class="partial">Speed</li>
+          <li class="yes">Network of acquirers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROCESS ===================== -->
+<section class="section" id="process">
+  <div class="container">
+    <div class="section-tag">The engagement</div>
+    <h2 class="section-title display">Two weeks, <span class="accent">five clear steps.</span></h2>
+    <p class="section-deck">From the moment you sign the engagement letter to the moment you have a defensible QoE in hand.</p>
+
+    <div class="process-wrap">
+      <div class="process-aside">
+        <div class="process-aside-num display tab-nums">14</div>
+        <div class="process-aside-lbl">Days from kickoff call to a defensible quality-of-earnings memo in your hand.</div>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-step-label">DAY 1—2</div>
+          <div class="process-step-title">Kickoff &amp; data room</div>
+          <div class="process-step-body">90-minute kickoff call. We send a structured data request — aggregator exports (DoorDash/UberEats/Deliveroo/Swiggy/etc), tax returns (24 months), bank statements, POS dump, org chart. Secure data room provisioned.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-label">DAY 3—6</div>
+          <div class="process-step-title">Pipeline stages 1—5</div>
+          <div class="process-step-body">AI pipeline ingests, classifies, extracts, reconciles. Daily standups on flagged items. Manual review pass on every flag. You see exactly what the model is doing — no black box.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-label">DAY 7—9</div>
+          <div class="process-step-title">Brand &amp; cohort deep dive</div>
+          <div class="process-step-body">Per-brand contribution analysis, M1—M12 retention curves, paid vs. organic split. Mid-engagement review call — you see preliminary findings before they're in the report.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-label">DAY 10—12</div>
+          <div class="process-step-title">Synthesis</div>
+          <div class="process-step-body">Quality of earnings memo drafted. Adjustment schedule built. Valuation band triangulated against recent comparable deals. Internal partner review.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-label">DAY 13—14</div>
+          <div class="process-step-title">Deliverable &amp; debrief</div>
+          <div class="process-step-body">Final QoE memo, adjustment schedule, valuation note delivered. 2-hour walkthrough with you and your CFO/CA. You're ready for buyer-side diligence within the week.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title display">The questions <span class="accent">we get most.</span></h2>
+
+    <div class="faq-list" style="margin-top: 32px;">
+      <div class="faq-item">
+        <div class="faq-q">Why specialise in delivery-led food businesses?</div>
+        <div class="faq-a">Because the business <em>is</em> its data — and 80% of that data sits in <strong>delivery aggregator and POS dashboards</strong>. Diligence for an aggregator-driven cloud kitchen or restaurant is fundamentally different from a dine-in venue or a D2C brand. Specialisation lets us be 3× faster and catch what generalists miss.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is AI doing all the work?</div>
+        <div class="faq-a">AI does extraction, reconciliation and pattern detection. <strong>Humans do judgment</strong> — what to flag, what to adjust, what to present. Every finding has a partner's name on it before it leaves our office.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will my data be safe?</div>
+        <div class="faq-a">All data is processed in a <strong>private cloud environment</strong>. Mutual NDA before kickoff. Raw files encrypted at rest, deleted 30 days after engagement end unless you instruct otherwise.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What size of business do you take on?</div>
+        <div class="faq-a">Cloud kitchen and delivery-led restaurant operators in the <strong>₹2—500 Cr annual revenue range</strong>. Most engagements sit between ₹10—100 Cr. For businesses under ₹2 Cr, a full diligence isn't worth the cost — a valuation note may be more appropriate.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I share findings with my buyer?</div>
+        <div class="faq-a">Yes. <strong>The QoE memo is yours.</strong> Most clients share the full report with serious buyers — it shortens buyer-side diligence dramatically. We can produce a redacted version on request.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I'm not selling yet?</div>
+        <div class="faq-a">Most clients aren't. <strong>Pre-transaction diligence</strong> finds and fixes issues a buyer would have found — typically 6—12 months before going to market. The valuation uplift usually pays for the engagement 20× over.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I have to do Diligence first to subscribe to Continuity?</div>
+        <div class="faq-a">It's the recommended path — <strong>Diligence sets the baseline</strong>, and Continuity tracks the delta against it. But if you have a recent QoE from elsewhere, we can use that as the baseline and start you directly on Continuity. We'll just need a half-day to ingest and validate.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's actually in the monthly Continuity memo?</div>
+        <div class="faq-a">Four pages. <strong>Page 1:</strong> the diligence-readiness score and what moved. <strong>Page 2:</strong> commission leakage and aggregator reconciliation deltas. <strong>Page 3:</strong> unit economics drift by brand and kitchen. <strong>Page 4:</strong> cohort and CAC trajectory, plus 3—5 specific items that would now flag in a buyer-side diligence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta-section">
+  <div class="cta-section-inner">
+    <h2 class="cta-title display">Find out what your business is <span class="accent">actually worth.</span></h2>
+    <p class="cta-deck">A 30-minute call. No deck, no pitch. Bring your last 3 months of aggregator data if you want a directional take in the conversation.</p>
+    <button class="btn btn-primary btn-primary-lg" onclick="openContact()">Book a 30-min walkthrough →</button>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-row">
+          <div class="brand-glyph">l</div>
+          <span>lakshya</span>
+        </div>
+        <div class="footer-tagline">The diligence buyers were going to do anyway. Done first, by you.</div>
+        <div class="footer-status">
+          <span class="status-dot"></span>
+          Accepting new mandates · Q3 2026
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Practice</div>
+        <ul class="footer-list">
+          <li>Sell-side diligence</li>
+          <li>Quality of earnings</li>
+          <li>Pre-transaction prep</li>
+          <li>Valuation advisory</li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-label">Sectors</div>
+        <ul class="footer-list">
+          <li>Cloud kitchens</li>
+          <li>Delivery-led restaurants</li>
+          <li>Multi-brand operators</li>
+          <li>QSR chains</li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-label">Company</div>
+        <ul class="footer-list">
+          <li>About</li>
+          <li>Insights</li>
+          <li>Contact</li>
+          <li>rohit@lakshya.in</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-mark display">lakshya.</div>
+
+    <div class="footer-bottom">
+      <div>© 2026 lakshya · OPERATING GLOBALLY</div>
+      <div>BUILT WITH AI · DELIVERED BY HUMANS</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ========================================
+// CALENDLY CONFIG
+// ========================================
+// Replace the URL below with your real Calendly event link.
+// Format: https://calendly.com/your-username/your-event-name
+// Example: https://calendly.com/rohit-lakshya/30min
+const CALENDLY_URL = 'https://calendly.com/rohitraj2496/30min';
+// ========================================
+
+function openContact() {
+  // Use Calendly's inline popup widget if available
+  if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
+    Calendly.initPopupWidget({
+      url: CALENDLY_URL,
+      // Match Lakshya's dark theme
+      prefill: {},
+      utm: {
+        utmSource: 'lakshya-website',
+        utmMedium: 'book-call-button'
+      }
+    });
+    return false;
+  }
+  // Fallback: open Calendly in new tab if script hasn't loaded yet
+  window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+  return false;
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-center a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+</body>
+</html>
