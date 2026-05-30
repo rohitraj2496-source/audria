@@ -5,6 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Audria — The AI diligence agent for cloud kitchens & restaurants</title>
 <meta name="description" content="Sell-side financial diligence built for cloud kitchens and delivery-led restaurants. Reconciles aggregator, POS, tax and bank data in 2 weeks. Not 8." />
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABSElEQVR42mNgGAUDDBhxSez4H/Of2pZ5MC5hJOgAWliMzyFMAx0FTPT2Pbo9gysERh0w6oCBACzkaHrz9AfDkoZ7DBf2vmX4+e0fg5opH0NCqwpDse1pBgYGBgY1Ez6Gjr0mtHHA+xe/GMoczzB8ePkLLnb50HuGOp/z9AmBFW334JbLqHMzuCdJM3z79Idh89RH9HHAud1vGRgYGBg4uJgZWrYZMfCJsEKC3ZSPoTHgAu0T4cc3vxkYGBgYxBU54ZYzMDAwqJvz0ycX8EMtfXHvO8OHV4h0cOPER/pEgZGrMMPuhc8Yfn7/y1DrfY7BI1mGvmkgvFKR4fT2NwwfXv1ieHrrG8Pc8luQNMHNTJ8oEJJkZ+jcZ8JgEyzOwCvEysDGycSgYyPI0LzViPImGb3aA8itotG6YNQBTITa7cO+WT7gPaNRAACwKmwcIT/IRQAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+
+<!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
+<meta property="og:type"        content="website" />
+<meta property="og:url"         content="https://www.audria.in/" />
+<meta property="og:title"       content="Know what your cloud kitchen is actually worth — before the sale, not after." />
+<meta property="og:description" content="audria runs the financial audit a sophisticated buyer would run anyway — commission leakage, brand-level unit economics, cohort behaviour — and hands you the findings first." />
+<meta property="og:image"       content="https://www.audria.in/audria-og.png" />
+<meta property="og:image:width"  content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name"   content="audria" />
+
+<!-- Twitter / X card -->
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:url"         content="https://www.audria.in/" />
+<meta name="twitter:title"       content="Know what your cloud kitchen is actually worth — before the sale, not after." />
+<meta name="twitter:description" content="audria runs the financial audit a sophisticated buyer would run anyway — 2 weeks, not 8." />
+<meta name="twitter:image"       content="https://www.audria.in/audria-og.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
